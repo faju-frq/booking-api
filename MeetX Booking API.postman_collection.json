@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "993980d3-2159-4439-b7b2-9376207127cb",
+		"name": "MeetX Booking API",
+		"description": "This collection contains requests to test the MeetX Activity Booking API. The API allows users to register, log in, list activities, book activities, and view booked activities.\n\n# <u><b>Base URL</b></u>\n\n[http://localhost:5000/api<br><br>](http://localhost:5000/api)All endpoints except `/auth/register` and `/auth/login` require authentication via JWT token.\n\nAfter logging in, include the `Authorization` header in your requests:\n\nAuthorization: Bearer Your_JWT_Token\n\nTo test these endpoints in Postman:\n\n1. **Set up the environment** by adding the base URL (`http://localhost:5000`).\n    \n2. For each endpoint, ensure you set the appropriate HTTP method (GET/POST) and add the necessary headers and body data.\n    \n3. After obtaining the JWT token from the `/auth/login` endpoint, use it for authentication by adding it to the **Authorization** tab.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38499776",
+		"_collection_link": "https://lunar-meteor-646141.postman.co/workspace/My-Workspace~90baab4b-8c92-412c-8935-0343c2b0f171/collection/38499776-993980d3-2159-4439-b7b2-9376207127cb?action=share&source=collection_link&creator=38499776"
+	},
+	"item": [
+		{
+			"name": "User Registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane@example.com\",\n  \"phone\": \"1234567890\",\n  \"password\": \"password123\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": ""
+				},
+				"description": "Register a new user."
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"jane@example.com\",\n  \"password\": \"password123\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Log in to the system and obtain a JWT token."
+			},
+			"response": []
+		},
+		{
+			"name": "List of activities (Public)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/activities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"activities"
+					]
+				},
+				"description": "Retrieve a list of all available activities."
+			},
+			"response": []
+		},
+		{
+			"name": "Activity Booking (Authenticated)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"name": "cache-control",
+						"type": "text"
+					},
+					{
+						"key": "Postman-Token",
+						"value": "<calculated when request is sent>",
+						"name": "postman-token",
+						"type": "text"
+					},
+					{
+						"key": "Content-Length",
+						"value": "0",
+						"name": "content-length",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "<calculated when request is sent>",
+						"name": "host",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "PostmanRuntime/7.39.1",
+						"name": "user-agent",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"name": "accept",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br",
+						"name": "accept-encoding",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"name": "connection",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqYW5lQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ2NzA0MjQ1LCJleHAiOjE3NDY3MDc4NDV9.tJwLChlcbXmBgYVTxTI_7nQQHXvySbPJ22t_5A0vrSs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"activityId\": 1\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"bookings"
+					]
+				},
+				"description": "Book an activity by providing the activity ID and description."
+			},
+			"response": []
+		},
+		{
+			"name": "Get My Bookings(Authenticated)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"name": "cache-control",
+						"type": "text"
+					},
+					{
+						"key": "Postman-Token",
+						"value": "<calculated when request is sent>",
+						"name": "postman-token",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "<calculated when request is sent>",
+						"name": "host",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "PostmanRuntime/7.39.1",
+						"name": "user-agent",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"name": "accept",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br",
+						"name": "accept-encoding",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"name": "connection",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqYW5lQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ2NzA0ODcxLCJleHAiOjE3NDY3MDg0NzF9.7orPNkaHyRBDeYwAmwrksNanrV9JRQNyQblr3kjXVW4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"bookings"
+					]
+				},
+				"description": "Retrieve the list of activities booked by the logged-in user."
+			},
+			"response": []
+		}
+	]
+}
