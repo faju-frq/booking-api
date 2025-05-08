@@ -1,27 +1,49 @@
 import { Sequelize } from "sequelize";
-import dbConfig from "../config/db.config.js";
+import dotenv from "dotenv";
 
-export const sequelize = new Sequelize(
-  dbConfig.DB,
-  dbConfig.USER,
-  dbConfig.PASSWORD,
-  {
-    host: dbConfig.HOST,
-    dialect: dbConfig.dialect,
+// Load environment variables from .env file (only for local dev)
+dotenv.config();
+
+// Get the MySQL URL from the environment variable for production
+const dbURL = process.env.MYSQL_URL;
+
+let sequelize;
+
+// If the MYSQL_URL is present, use it (for production environments like Render or Railway)
+if (dbURL) {
+  sequelize = new Sequelize(dbURL, {
+    dialect: "mysql",
     logging: false,
-  }
-);
+  });
+} else {
+  // Fallback for local development, where dbConfig is used
+  import dbConfig from "../config/db.config.js";
+  sequelize = new Sequelize(
+    dbConfig.DB,
+    dbConfig.USER,
+    dbConfig.PASSWORD,
+    {
+      host: dbConfig.HOST,
+      dialect: dbConfig.dialect,
+      logging: false,
+    }
+  );
+}
 
 import userModel from "../models/user.model.js";
 import activityModel from "../models/activity.model.js";
-import bookingModel from "../models/booking.model.js"
+import bookingModel from "../models/booking.model.js";
 
+// Initialize models
 export const User = userModel(sequelize);
 export const Activity = activityModel(sequelize);
 export const Booking = bookingModel(sequelize);
 
-User.hasMany(Booking, {foreignKey: 'userId'});
+// Define model relationships
+User.hasMany(Booking, { foreignKey: 'userId' });
 Booking.belongsTo(User, { foreignKey: 'userId' });
 
 Activity.hasMany(Booking, { foreignKey: 'activityId' });
 Booking.belongsTo(Activity, { foreignKey: 'activityId' });
+
+export default sequelize;
