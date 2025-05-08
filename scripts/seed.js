@@ -1,5 +1,5 @@
 // scripts/seed.js (one-time manual script, not exposed as a route)
-import { sequelize, Activity } from "../models/index.js";
+import  sequelize, { Activity } from "../models/index.js";
 
 const seedActivities = async () => {
   await sequelize.sync();
