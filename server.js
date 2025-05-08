@@ -7,7 +7,7 @@ import  sequelize  from './models/index.js';
 import authRoutes from './routes/auth.routes.js';
 import activityRoutes from './routes/activity.routes.js';
 import bookingRoutes from './routes/booking.routes.js';
-
+import seedActivities from './scripts/seed.js'
 
 const app = express();
 const PORT = process.env.PORT || 3306;
@@ -28,6 +28,7 @@ app.listen(PORT, async () => {
     await sequelize.sync({ alter: true }); // Creates/updates tables
     console.log('Database connected and models synced.');
     console.log(`Server is running on port ${PORT}`);
+    await seedActivities();
   } catch (err) {
     console.error('Error syncing database:', err);
   }
