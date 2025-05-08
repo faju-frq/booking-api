@@ -8,28 +8,10 @@ dotenv.config();
 // Get the MySQL URL from the environment variable for production
 const dbURL = process.env.MYSQL_URL;
 
-let sequelize;
-
-// If the MYSQL_URL is present, use it (for production environments like Render or Railway)
-if (dbURL) {
-  sequelize = new Sequelize(dbURL, {
+const sequelize = new Sequelize(dbURL, {
     dialect: "mysql",
     logging: false,
   });
-} else {
-  // Fallback for local development, where dbConfig is used
-  
-  sequelize = new Sequelize(
-    dbConfig.DB,
-    dbConfig.USER,
-    dbConfig.PASSWORD,
-    {
-      host: dbConfig.HOST,
-      dialect: dbConfig.dialect,
-      logging: false,
-    }
-  );
-}
 
 import userModel from "../models/user.model.js";
 import activityModel from "../models/activity.model.js";
