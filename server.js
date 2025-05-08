@@ -3,7 +3,7 @@ import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
 import morgan from 'morgan';
-import { sequelize } from './models/index.js';
+import  sequelize  from './models/index.js';
 import authRoutes from './routes/auth.routes.js';
 import activityRoutes from './routes/activity.routes.js';
 import bookingRoutes from './routes/booking.routes.js';
