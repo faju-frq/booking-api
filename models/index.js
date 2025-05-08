@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
+import dbConfig from "../config/db.config.js";
 
 // Load environment variables from .env file (only for local dev)
 dotenv.config();
@@ -17,7 +18,7 @@ if (dbURL) {
   });
 } else {
   // Fallback for local development, where dbConfig is used
-  import dbConfig from "../config/db.config.js";
+  
   sequelize = new Sequelize(
     dbConfig.DB,
     dbConfig.USER,
