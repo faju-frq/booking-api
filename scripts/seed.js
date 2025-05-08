@@ -23,4 +23,4 @@ const seedActivities = async () => {
   process.exit();
 };
 
-seedActivities();
+export default seedActivities();
