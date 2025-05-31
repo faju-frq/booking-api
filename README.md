@@ -40,7 +40,6 @@ A simple RESTful API for booking activities (cricket matches, movies, football, 
 - **MySQL** database integration via Sequelize ORM
 - **Clean folder structure** (controllers, models, routes, middleware)
 - **CORS** enabled for cross-origin requests
-- **Request logging** with morgan (development)
 
 ## 🛠 Tech Stack
 
@@ -53,7 +52,7 @@ A simple RESTful API for booking activities (cricket matches, movies, football, 
 | Hashing     | bcryptjs          |
 | Validation  | express-validator |
 | Environment | dotenv            |
-| Dev Tools   | nodemon, morgan   |
+| Dev Tools   | nodemon           |
 
 ## 📋 Prerequisites
 
