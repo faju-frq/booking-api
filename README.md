@@ -1,4 +1,4 @@
-# Activity Booking API (MeetX)
+# Activity Booking API
 
 A simple RESTful API for booking activities (cricket matches, movies, football, etc.), built with Node.js, Express.js, MySQL (Sequelize), and JWT authentication.
 
